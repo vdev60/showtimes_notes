@@ -1,5 +1,5 @@
 class Api::V1::NotesController < ApplicationController
-  before_action :set_note, only: %i[update show]
+  before_action :set_note, only: %i[update show destroy]
   
   def show
     render json: @note
@@ -21,6 +21,10 @@ class Api::V1::NotesController < ApplicationController
     else
       render json: @note.errors, status: :unprocessable_entity
     end
+  end
+
+  def destroy
+    @note.destroy!
   end
 
   private 
