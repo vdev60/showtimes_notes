@@ -80,4 +80,18 @@ RSpec.describe "Api::V1::Notes", type: :request do
       end
     end
   end
+
+  describe "GET /api/v1/notes/:id" do
+    it "renders a JSON responsee OK for the existed note" do
+      note = Note.create!(valid_attributes)
+      get api_v1_note_path(note)
+      expect(response).to have_http_status(:ok)
+    end
+
+    it "renders a JSON responsee 404 for the not existed note" do
+      note = Note.create!(valid_attributes)
+      get api_v1_note_path(id: DateTime.now)
+      expect(response).to have_http_status(:not_found)
+    end
+  end
 end
