@@ -111,4 +111,33 @@ RSpec.describe "Api::V1::Notes", type: :request do
       expect(response).to have_http_status(:ok)
     end
   end
+
+  describe "GET /api/v1/notes" do
+    let!(:note1) { Note.create!(title: "First Note", content: "Some content") }
+    let!(:note2) { Note.create!(title: "Second Note", content: "Other content") }
+    let!(:note3) { Note.create!(title: "Another Note", content: "Different content including First") }
+
+    context "without search query" do
+      it "returns all notes" do
+        get api_v1_notes_path, as: :json
+
+        expect(response).to have_http_status(:ok)
+        expect(JSON.parse(response.body).size).to eq(3)
+      end
+    end
+
+    context "with search query" do
+      it "returns notes matching the title or content" do
+        get api_v1_notes_path(query: "First"), as: :json
+        expect(response).to have_http_status(:ok)
+        expect(JSON.parse(response.body).map { |note| note["id"] }).to contain_exactly(note1.id, note3.id)
+      end
+
+      it "returns an empty array if no notes match" do
+        get api_v1_notes_path(query: "None"), as: :json
+        expect(response).to have_http_status(:ok)
+        expect(JSON.parse(response.body)).to be_empty
+      end
+    end
+  end
 end
