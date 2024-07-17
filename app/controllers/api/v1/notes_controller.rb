@@ -1,6 +1,11 @@
 class Api::V1::NotesController < ApplicationController
   before_action :set_note, only: %i[update show destroy]
-  
+  def index
+    @notes = Note.all
+
+    render json: @notes
+  end
+
   def show
     render json: @note
   end
