@@ -103,4 +103,12 @@ RSpec.describe "Api::V1::Notes", type: :request do
       }.to change(Note, :count).by(-1)
     end
   end
+
+  describe "GET /api/v1/notes" do
+    it "renders a successful response" do
+      Note.create!(valid_attributes)
+      get api_v1_notes_path, as: :json
+      expect(response).to have_http_status(:ok)
+    end
+  end
 end
