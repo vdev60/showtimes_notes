@@ -46,4 +46,38 @@ RSpec.describe "Api::V1::Notes", type: :request do
       end
     end
   end
+
+  describe "PATCH /api/v1/notes/:id" do
+    context "with valid params" do
+      let(:new_attributes){
+        {
+          title: "new title",
+          content: "new content"
+        }
+      }
+      it "updates the existed note" do
+        note = Note.create!(valid_attributes)
+        patch api_v1_note_path(note),
+              params: { note: invalid_attributes }, as: :json
+        expect(note.attributes).to include(valid_attributes.stringify_keys)
+      end
+
+      it "renders a JSON response" do
+        note = Note.create!(valid_attributes)
+        patch api_v1_note_path(note), params: { note: new_attributes }, as: :json
+        expect(response).to have_http_status(:ok)
+        expect(response.content_type).to match(a_string_including("application/json"))
+      end
+    end
+
+    context "with invalid params" do
+      it "renders a JSON response with errors" do
+        note = Note.create!(valid_attributes)
+        patch api_v1_note_path(note),
+             params: { note: invalid_attributes }, as: :json
+        expect(response).to have_http_status(:unprocessable_entity)
+        expect(response.content_type).to match(a_string_including("application/json"))
+      end
+    end
+  end
 end
