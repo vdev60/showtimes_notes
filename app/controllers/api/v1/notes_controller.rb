@@ -1,6 +1,10 @@
 class Api::V1::NotesController < ApplicationController
-  before_action :set_note, only: %i[update]
+  before_action :set_note, only: %i[update show]
   
+  def show
+    render json: @note
+  end
+
   def create
     @note = Note.new(note_params)
 
