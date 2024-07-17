@@ -94,4 +94,13 @@ RSpec.describe "Api::V1::Notes", type: :request do
       expect(response).to have_http_status(:not_found)
     end
   end
+
+  describe "DELETE /api/v1/notes/:id" do
+    it "destroys the note" do
+      note = Note.create!(valid_attributes)
+      expect {
+        delete api_v1_note_path(note), as: :json
+      }.to change(Note, :count).by(-1)
+    end
+  end
 end
