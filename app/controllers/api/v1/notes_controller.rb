@@ -1,7 +1,11 @@
 class Api::V1::NotesController < ApplicationController
   before_action :set_note, only: %i[update show destroy]
   def index
-    @notes = Note.all
+    if params[:query].present?
+      @notes = Note.search_by_title_or_content(params[:query])
+    else
+      @notes = Note.all
+    end
 
     render json: @notes
   end
