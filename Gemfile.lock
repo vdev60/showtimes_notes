@@ -88,6 +88,7 @@ GEM
       irb (~> 1.10)
       reline (>= 0.3.8)
     diff-lcs (1.5.1)
+    docile (1.4.0)
     drb (2.2.1)
     erubi (1.13.0)
     et-orbi (1.2.11)
@@ -226,6 +227,12 @@ GEM
       fugit (~> 1.1, >= 1.1.6)
     shoulda-matchers (6.2.0)
       activesupport (>= 5.2.0)
+    simplecov (0.22.0)
+      docile (~> 1.1)
+      simplecov-html (~> 0.11)
+      simplecov_json_formatter (~> 0.1)
+    simplecov-html (0.12.3)
+    simplecov_json_formatter (0.1.4)
     sinatra (4.0.0)
       mustermann (~> 3.0)
       rack (>= 3.0.0, < 4)
@@ -261,6 +268,7 @@ DEPENDENCIES
   resque-scheduler
   rspec-rails (~> 6.1)
   shoulda-matchers (~> 6.0)
+  simplecov
   trilogy (~> 2.4)
   tzinfo-data
 

@@ -43,6 +43,7 @@ gem "bootsnap", require: false
 group :development, :test do
   gem "rspec-rails", "~> 6.1"
   gem 'shoulda-matchers', '~> 6.0'
+  gem 'simplecov'
   # See https://guides.rubyonrails.org/debugging_rails_applications.html#debugging-with-the-debug-gem
   gem "debug", platforms: %i[ mri windows ]
 end
