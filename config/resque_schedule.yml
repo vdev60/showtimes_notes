@@ -1,0 +1,7 @@
+# config/resque_schedule.yml
+note_import_job:
+  every: "10s"
+  class: NoteImportJob
+  queue: note_import
+  args:
+  description: "This job runs every 5 seconds"

@@ -18,6 +18,7 @@ gem "puma", ">= 5.0"
 # gem "redis", ">= 4.0.1"
 
 gem "resque", "~> 2.6"
+gem "resque-scheduler"
 
 # Use Kredis to get higher-level data types in Redis [https://github.com/rails/kredis]
 # gem "kredis"
