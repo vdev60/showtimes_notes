@@ -1,24 +1,62 @@
-# README
+# Project Name
 
-This README would normally document whatever steps are necessary to get the
-application up and running.
+## Prerequisites
 
-Things you may want to cover:
+To set up and run this project, ensure you have the following installed:
 
-* Ruby version
+- **Ruby** (version 3.0.0 or newer)
+- **Rails** (version 7.0 or newer)
+- **MySQL**
+- **Redis**
 
-* System dependencies
+## Setup
 
-* Configuration
+### 1. Install Gems
+```sh
+bundle install
+```
 
-* Database creation
+### 2. Setup Database
+```sh
+rails db:create
+rails db:migrate
+```
 
-* Database initialization
+## Running
 
-* How to run the test suite
+### 1. Start Redis
+```sh
+redis-server
+```
 
-* Services (job queues, cache servers, search engines, etc.)
+### 2. Start Rails Server
+```sh
+rails s
+```
 
-* Deployment instructions
+### 3. Start Resque Worker
+```sh
+QUEUE=* bundle exec rake resque:work
+```
 
-* ...
+### 4. Start Resque Scheduler
+```sh
+bundle exec rake environment resque:scheduler
+```
+
+To run commands 2, 3, and 4 together, use:
+```sh
+foreman start
+```
+
+## Testing  
+
+### 1. Run All Tests
+```sh
+bundle exec rspec spec
+```
+
+### 2. See Coverage
+```sh
+open coverage/index.html
+```
